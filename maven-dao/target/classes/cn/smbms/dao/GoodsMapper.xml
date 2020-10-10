@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smbms.dao.GoodsMapper">
+
+    <select id="getGoods" resultType="Goods">
+        SELECT * FROM goods
+        <where>
+            <if test="goods_district!=null and goods_district!=0">
+                goods_district = #{goods_district}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" resultType="Goods">
+        SELECT * FROM goods WHERE id=#{id}
+    </select>
+
+    <update id="update" parameterType="Goods">
+        UPDATE `guoqing2`.`goods`
+        <set>
+            <if test="goods_name!=null and goods_name!=''">
+                `goods_name` = #{goods_name},
+            </if>
+
+            <if test="bill_status!=null and bill_status!=''">
+                `bill_status` = #{bill_status},
+            </if>
+
+            <if test="goods_district!=null and goods_district!=''">
+                `goods_district` = #{goods_district},
+            </if>
+
+            <if test="goods_price!=null and goods_price!=''">
+                `goods_price` = #{goods_price},
+            </if>
+
+            <if test="goods_count!=null and goods_count!=''">
+                `goods_count` = #{goods_count}
+            </if>
+        </set>
+
+        <where>
+            `id` = #{id};
+        </where>
+    </update>
+
+</mapper>
